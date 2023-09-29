@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Basic -->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Site Metas -->
+    <title>صحارى مصر</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Site Icons -->
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- Site CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Responsive CSS -->
+    <link rel="stylesheet" href="css/responsive.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/custom.css">
+
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body style="background-color: #9dba62;background-image: url(../freshshop/images/128.webp);background-size: 100%;">
+    <div>
+        <br>
+        <h1 style="text-align: center;color: #2b4603;font-size: 33px;">ادخل بياناتك وعند الاستفسار </h1>
+        <p style="text-align: center;"><a style="border-radius: 50px;font-size: 20px;" class="btn hvr-hover" href="about.html"> تواصل معنا </a></p>
+    </div>
+    <center>
+        <table border="4">
+        <thead>
+        <tr>
+        <th>اسم المعلن </th>
+        <td><input type="text" name="اسم" id="اسم"></td>
+        </tr>
+        <tr>
+        <th> اسم المعدات</th>
+        <td><input type="text" name="النوع" id="النوع" required></td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+        <th>وصف المعدات</th>
+        <td><input type="text" name="الوصف" id="الوصف"></td>
+        </tr>
+        <tr>
+            <th>استخدام المعدات</th>
+            <td><input type="text" name="الكمية" id="الكمية"></td>
+        </tr>
+        <tr>
+            <th>  السعر بالجنيه </th>
+            <td><input type="text" name="السعر" id="السعر"></td>
+        </tr>
+        <tr>
+            <th>العنوان بالتفصيل</th>
+            <td><input type="text" name="العنوان" id="العنوان"></td>
+        </tr>
+        <tr>
+            <th>رقم التواصل</th>
+            <td><input type="text" name="الرقم" id="الرقم"required></td>
+        </tr>
+        <tr>
+        <th>صورة المنتج</th>
+        <td><input type="file" name="صورة" id="صورة"></td>
+        </tr>
+        <tr id="btna">
+        <td colspan="2"><input class="in" type="button" name="button" id="btn" value=" اضافة " onclick="test()"></td>
+        </tr>
+        </tbody>
+        </table>
+        <table border="8" id="show">
+        <thead>
+        <tr>
+        <th>اسم المعلن</th>   
+        <th>اسم المعدات </th>
+        <th>وصف المعدات </th>
+        <th>استخدام المعدات</th>
+        <th>السعر بالجنيه </th>
+        <th>العنوان بالتفصيل</th>
+        <th>رقم التواصل</th>
+        <th> صورة المنتج</th>
+        </tr>
+        </thead>
+        <tbody id="dataBody5">
+        </tbody>
+        </table>
+        </center>
+        <script>
+        function test() {
+         // Retrieving data
+         var uid = document.getElementById("اسم").value;
+         var pw = document.getElementById("النوع").value;
+         var email = document.getElementById("الوصف").value;
+         var a1 = document.getElementById("الكمية").value;
+         var a2 = document.getElementById("السعر").value;
+         var a3 = document.getElementById("العنوان").value;
+         var a4 = document.getElementById("الرقم").value;
+         var imageInput = document.getElementById("صورة");
+         var imageBase64 = '';
+
+         if(uid===""||pw===""||email===""||a1===""||a2===""||a3===""||a4===""){
+            alert("لم تقم بادخال البيانات، قم بملئ الحقول الفارغة");
+            return;
+         }
+        
+         // Check if an image is selected
+         if (imageInput.files.length > 0) {
+         const reader = new FileReader();
+         reader.onload = function(e) {
+         imageBase64 = e.target.result;
+         saveData(uid, pw, email,a1,a2,a3,a4, imageBase64);
+         };
+         reader.readAsDataURL(imageInput.files[0]);
+         } else {
+         // No image selected, save data without image
+         saveData(uid, pw, email,a1,a2,a3,a4, imageBase64);
+         }
+        }
+        
+        function saveData(uid, pw, email,a1,a2,a3,a4, imageBase64) {
+         // Create a new row for the data table
+         var newRow = document.createElement("tr");
+         var nameCell = document.createElement("td");
+         var pwCell = document.createElement("td");
+         var emailCell = document.createElement("td");
+         var namea1 = document.createElement("td");
+         var namea2 = document.createElement("td");
+         var namea3 = document.createElement("td");
+         var namea4 = document.createElement("td");
+         var imageCell = document.createElement("td");
+        
+         // Set the cell values
+         nameCell.innerText = uid;
+         pwCell.innerText = pw;
+         emailCell.innerText = email;
+         namea1.innerText = a1;
+         namea2.innerText = a2;
+         namea3.innerText = a3;
+         namea4.innerText = a4;
+         
+
+
+        
+         // Display the image if available
+         if (imageBase64) {
+         var image = document.createElement("img");
+         image.src = imageBase64;
+         imageCell.appendChild(image);
+         }
+        
+         // Append cells to the new row
+         newRow.appendChild(nameCell);
+         newRow.appendChild(pwCell);
+         newRow.appendChild(emailCell);
+         newRow.appendChild(namea1);
+         newRow.appendChild(namea2);
+         newRow.appendChild(namea3);
+         newRow.appendChild(namea4);
+         newRow.appendChild(imageCell);
+        
+         // Append the new row to the data table
+         document.getElementById("dataBody5").appendChild(newRow);
+        
+         // Clear input fields
+         document.getElementById("اسم").value = "";
+         document.getElementById("النوع").value = "";
+         document.getElementById("الوصف").value = "";
+         document.getElementById("الكمية").value = "";
+         document.getElementById("السعر").value = "";
+         document.getElementById("العنوان").value = "";
+         document.getElementById("الرقم").value = "";
+         document.getElementById("صورة").value = "";
+        
+         // Save the data to local storage
+         var data12 = JSON.parse(localStorage.getItem("data12")) || [];
+         data12.push({ uid: uid, pw: pw, email: email,a1: a1,a2: a2,a3: a3,a4:a4, image: imageBase64 });
+         localStorage.setItem("data12", JSON.stringify(data12));
+        }
+        
+        // Load data from local storage when the page loads
+        window.onload = function() {
+         var data = JSON.parse(localStorage.getItem("data12")) || [];
+         var dataBody = document.getElementById("dataBody5");
+        
+         for (var i = 0; i < data.length; i++) {
+         var newRow = document.createElement("tr");
+         var nameCell = document.createElement("td");
+         var pwCell = document.createElement("td");
+         var emailCell = document.createElement("td");
+         var namea1 = document.createElement("td");
+         var namea2 = document.createElement("td");
+         var namea3 = document.createElement("td");
+         var namea4 = document.createElement("td");
+         var imageCell = document.createElement("td");
+        
+         nameCell.innerText = data[i].uid;
+         pwCell.innerText = data[i].pw;
+         emailCell.innerText = data[i].email;
+         namea1.innerText = data[i].a1;
+         namea2.innerText = data[i].a2;
+         namea3.innerText = data[i].a3;
+         namea4.innerText = data[i].a4;
+         // Display the saved image if available
+         if (data[i].image) {
+         var image = document.createElement("img");
+         image.src = data[i].image;
+         imageCell.appendChild(image);
+         }
+        
+         newRow.appendChild(nameCell);
+         newRow.appendChild(pwCell);
+         newRow.appendChild(emailCell);
+         newRow.appendChild(namea1);
+         newRow.appendChild(namea2);
+         newRow.appendChild(namea3);
+         newRow.appendChild(namea4);
+         newRow.appendChild(imageCell);
+        
+         dataBody5.appendChild(newRow);
+         }
+        }
+        </script>
+    <a href="#" id="back-to-top" title="Back to top" style="display: none;">&uarr;</a>
+
+    <!-- ALL JS FILES -->
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <!-- ALL PLUGINS -->
+    <script src="js/jquery.superslides.min.js"></script>
+    <script src="js/bootstrap-select.js"></script>
+    <script src="js/inewsticker.js"></script>
+    <script src="js/bootsnav.js."></script>
+    <script src="js/images-loded.min.js"></script>
+    <script src="js/isotope.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/baguetteBox.min.js"></script>
+    <script src="js/jquery-ui.js"></script>
+    <script src="js/jquery.nicescroll.min.js"></script>
+    <script src="js/form-validator.min.js"></script>
+    <script src="js/contact-form-script.js"></script>
+    <script src="js/custom.js"></script>
+</body>
+
+</html>
